@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Foo
+    <button onclick="handleClick()">history pushState</button>
+    <script>
+      function handleClick() {
+        let stateObj = { foo: 'bar' };
+        window.history.pushState(stateObj, 'page 2', 'bar.html');
+      }
+      console.log(`foo.history.state = ${JSON.stringify(history.state)}`);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    理解 popstate 事件
+    <button onclick="myPushState(1)">push state 1</button>
+    <button onclick="myPushState(2)">push state 2</button>
+    <button onclick="myPushState(3)">push state 3</button>
+    <button onclick="myReplaceState(9)">replace state 9</button>
+    <button onclick="myBack()">Back</button>
+    <input type="number" name="go" id="go" value="2" />
+    <button onclick="myGo()">Go</button>
+    <div id="output"></div>
+    <script>
+      window.onpopstate = (event) => {
+        alert(
+          'location: ' +
+            document.location +
+            ', state: ' +
+            JSON.stringify(event.state)
+        );
+      };
+
+      const printHistoryLength = () => {
+        const el = document.getElementById('output');
+        el.innerHTML = `history length: ${history.length}`;
+      };
+
+      printHistoryLength();
+
+      const myPushState = (n) => {
+        history.pushState({ page: n }, `title ${n}`, `?page=${n}`);
+        printHistoryLength();
+      };
+
+      const myReplaceState = (n) => {
+        history.replaceState({ page: n }, `title ${n}`, `?page=${n}`);
+        printHistoryLength();
+      };
+
+      const myBack = () => {
+        history.back();
+        printHistoryLength();
+      };
+
+      const myGo = () => {
+        let el = document.getElementById('go');
+        let n = el.value || 2;
+        history.go(n);
+        printHistoryLength();
+      };
+    </script>
+  </body>
+</html>
