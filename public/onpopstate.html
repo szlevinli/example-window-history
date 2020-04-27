@@ -18,16 +18,17 @@
     <script>
       window.onpopstate = (event) => {
         alert(
-          'location: ' +
-            document.location +
-            ', state: ' +
-            JSON.stringify(event.state)
+          `location: ${document.location}, state: ${JSON.stringify(
+            event.state
+          )}, history.state: ${JSON.stringify(history.state)}`
         );
       };
 
       const printHistoryLength = () => {
         const el = document.getElementById('output');
-        el.innerHTML = `history length: ${history.length}`;
+        el.innerHTML = `history length: ${
+          history.length
+        }, current state: ${JSON.stringify(history.state)}`;
       };
 
       printHistoryLength();
